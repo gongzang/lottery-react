@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/boxMenu.css';
+import './styles/boxMenu.scss';
 
 class BoxMenubar extends React.Component {
     constructor(props) {
