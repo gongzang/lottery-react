@@ -48,10 +48,10 @@
                 &:nth-child(#{$i+1}){
                     top: -5rem * $i;
                     opacity:1 - (0.1 * $i);
-                    transition:All 0.1s ease-in-out 2s - (0.1s * $i);
-                    -webkit-transition:All 0.1s ease-in-out 2s - (0.1s * $i);
-                    -moz-transition:All 0.1s ease-in-out 2s - (0.1s * $i);
-                    -o-transition:All 0.1s ease-in-out 2s - (0.1s * $i);
+                    transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    -webkit-transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    -moz-transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    -o-transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
                 }
             }
         }
