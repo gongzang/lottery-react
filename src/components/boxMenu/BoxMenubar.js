@@ -2,25 +2,34 @@ import React from 'react';
 import './styles/boxMenu.scss';
 
 class BoxMenubar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
+        const { menu: { menuData, menuList } } = this.props;
         return (
             <div className="wrap">
-                <div className="menuItem">
-                    <h2>menu1</h2>
-                    <div className='menuItem subMenuItem'>
-                    </div>
-                    <div className='menuItem subMenuItem'>
-                    </div>
-                    <div className='menuItem subMenuItem'>
-                    </div>
-                </div>
-                <div className="menuItem"></div>
-                <div className="menuItem"></div>
-                <div className="menuItem"></div>
+                {
+                    menuList && menuList.map(
+                        item => {
+                            return (
+                                <div className="menuItem">
+                                {console.log(menuData)}
+                                    <h2>{menuData[item].name}</h2>
+                                    {
+                                        menuData[item].subMenu && menuData[item].subMenu.map(
+                                            subItem => {
+                                                return (
+                                                    <div className='menuItem subMenuItem'>
+                                                        <h2>{menuData[subItem].lottery_name}</h2>
+                                                    </div>
+                                                )
+                                            }
+                                        )
+                                    }
+                                </div>
+                            )
+                        }
+                    )
+                }
             </div>
         );
     }
