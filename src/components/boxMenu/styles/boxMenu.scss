@@ -16,9 +16,14 @@
             color: #fff;
 
             .subMenuItem {
-                -webkit-transform: perspective(100rem) rotateX(0deg);
+                // -webkit-transform: perspective(100rem) rotateX(0deg);
             
-                transform: perspective(100rem) rotateX(0deg);
+                // transform: perspective(100rem) rotateX(0deg);
+                -webkit-transform-origin: bottom;
+            -webkit-animation-fill-mode: forwards;
+
+            transform-origin: bottom;
+            animation-fill-mode: forwards;
                
                 @for $i from 1 to 7 {
                     &:nth-child(#{$i+1}) {
@@ -40,11 +45,11 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
 
-            -webkit-transform: perspective(100rem) rotateX(-180deg);
+            // -webkit-transform: perspective(100rem) rotateX(-180deg);
             -webkit-transform-origin: bottom;
             -webkit-animation-fill-mode: forwards;
 
-            transform: perspective(100rem) rotateX(-180deg);
+            // transform: perspective(100rem) rotateX(-180deg);
             transform-origin: bottom;
             animation-fill-mode: forwards;
 
@@ -75,17 +80,21 @@
     }  
 }
 
-@-webkit-keyframes hide {
-    100% {-webkit-transform: perspective(100rem) rotateX(0)}
-}
-@keyframes hide {
-    100% {transform: perspective(100rem) rotateX(0)}
-}
 @-webkit-keyframes show {
-    100% {-webkit-transform: perspective(100rem) rotateX(-180deg)}
+    from {-webkit-transform: perspective(100rem) rotateX(-180deg)}
+    to {-webkit-transform: perspective(100rem) rotateX(0)}
 }
 @keyframes show {
-    100% {transform: perspective(100rem) rotateX(-180deg)}
+    from {transform: perspective(100rem) rotateX(-180deg)}
+    to {transform: perspective(100rem) rotateX(0)}
+}
+@-webkit-keyframes hide {
+    from {-webkit-transform: perspective(100rem) rotateX(0)}
+    to {-webkit-transform: perspective(100rem) rotateX(-180deg)}
+}
+@keyframes hide {
+    from {transform: perspective(100rem) rotateX(0)}
+    to {transform: perspective(100rem) rotateX(-180deg)}
 }
 
   
