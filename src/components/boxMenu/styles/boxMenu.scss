@@ -1,3 +1,20 @@
+
+@mixin transition($shadows...) {
+    -moz-transition: $shadows;
+    -webkit-transition: $shadows;
+    transition: $shadows;
+}
+@mixin show-transition($index, $property:All,$duration:0.1s,$timing-function:ease-in-out) {
+    @include transition($property $duration $timing-function (0.1s * $index));
+}
+@mixin hide-transition($index) {
+    @include transition(All 0.1s ease-in-out (1-(0.1s * $index)));
+}
+
+
+
+
+
 .wrap{
     width: 80rem;
     position: fixed;  
@@ -10,31 +27,24 @@
         width:25%;
         float:left; 
         height: 5rem;
-        color: #ddd;
+        color: #aaa;
         text-align: center;
         &:hover{
             color: #fff;
 
             .subMenuItem {
-                // -webkit-transform: perspective(100rem) rotateX(0deg);
+                -webkit-transform: perspective(100rem) rotateX(0deg);
             
-                // transform: perspective(100rem) rotateX(0deg);
+                transform: perspective(100rem) rotateX(0deg);
                 -webkit-transform-origin: bottom;
             -webkit-animation-fill-mode: forwards;
 
             transform-origin: bottom;
             animation-fill-mode: forwards;
                
-                @for $i from 1 to 7 {
+                @for $i from 1 to 8 {
                     &:nth-child(#{$i+1}) {
-                        animation:show 0.1s ease-in-out (0.1s * $i);
-                        -webkit-animation:show 0.1s ease-in-out (0.1s * $i);
-                        -moz-animation:show 0.1s ease-in-out (0.1s * $i);
-                        -o-animation:show 0.1s ease-in-out (0.1s * $i);
-                        // transition:All 0.1s ease-in-out (0.1s * $i);
-                        // -webkit-transition:All 0.1s ease-in-out (0.1s * $i);
-                        // -moz-transition:All 0.1s ease-in-out (0.1s * $i);
-                        // -o-transition:All 0.1s ease-in-out (0.1s * $i);
+                        @include show-transition($i);
                     }
                 }
             }
@@ -45,22 +55,19 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
 
-            // -webkit-transform: perspective(100rem) rotateX(-180deg);
+            -webkit-transform: perspective(100rem) rotateX(-180deg);
             -webkit-transform-origin: bottom;
             -webkit-animation-fill-mode: forwards;
 
-            // transform: perspective(100rem) rotateX(-180deg);
+            transform: perspective(100rem) rotateX(-180deg);
             transform-origin: bottom;
             animation-fill-mode: forwards;
 
-            @for $i from 1 to 7 {
+            @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
                     top: -5rem * $i;
                     opacity:1 - (0.1 * $i);
-                    animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
-                    -webkit-animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
-                    -moz-animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
-                    -o-animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    @include hide-transition($i);
                 }
             }
         }
@@ -80,22 +87,6 @@
     }  
 }
 
-@-webkit-keyframes show {
-    from {-webkit-transform: perspective(100rem) rotateX(-180deg)}
-    to {-webkit-transform: perspective(100rem) rotateX(0)}
-}
-@keyframes show {
-    from {transform: perspective(100rem) rotateX(-180deg)}
-    to {transform: perspective(100rem) rotateX(0)}
-}
-@-webkit-keyframes hide {
-    from {-webkit-transform: perspective(100rem) rotateX(0)}
-    to {-webkit-transform: perspective(100rem) rotateX(-180deg)}
-}
-@keyframes hide {
-    from {transform: perspective(100rem) rotateX(0)}
-    to {transform: perspective(100rem) rotateX(-180deg)}
-}
 
   
 

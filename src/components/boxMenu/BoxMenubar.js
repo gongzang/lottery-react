@@ -11,14 +11,13 @@ class BoxMenubar extends React.Component {
                     menuList && menuList.map(
                         item => {
                             return (
-                                <div className="menuItem">
-                                {console.log(menuData)}
+                                <div key={item} className="menuItem">
                                     <h2>{menuData[item].name}</h2>
                                     {
                                         menuData[item].subMenu && menuData[item].subMenu.map(
                                             subItem => {
                                                 return (
-                                                    <div className='menuItem subMenuItem'>
+                                                    <div key={item + '_' + subItem} className='menuItem subMenuItem'>
                                                         <h2>{menuData[subItem].lottery_name}</h2>
                                                     </div>
                                                 )
