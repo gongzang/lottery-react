@@ -22,10 +22,14 @@
                
                 @for $i from 1 to 7 {
                     &:nth-child(#{$i+1}) {
-                        transition:All 0.1s ease-in-out (0.1s * $i);
-                        -webkit-transition:All 0.1s ease-in-out (0.1s * $i);
-                        -moz-transition:All 0.1s ease-in-out (0.1s * $i);
-                        -o-transition:All 0.1s ease-in-out (0.1s * $i);
+                        animation:show 0.1s ease-in-out (0.1s * $i);
+                        -webkit-animation:show 0.1s ease-in-out (0.1s * $i);
+                        -moz-animation:show 0.1s ease-in-out (0.1s * $i);
+                        -o-animation:show 0.1s ease-in-out (0.1s * $i);
+                        // transition:All 0.1s ease-in-out (0.1s * $i);
+                        // -webkit-transition:All 0.1s ease-in-out (0.1s * $i);
+                        // -moz-transition:All 0.1s ease-in-out (0.1s * $i);
+                        // -o-transition:All 0.1s ease-in-out (0.1s * $i);
                     }
                 }
             }
@@ -48,10 +52,10 @@
                 &:nth-child(#{$i+1}){
                     top: -5rem * $i;
                     opacity:1 - (0.1 * $i);
-                    transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
-                    -webkit-transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
-                    -moz-transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
-                    -o-transition:All 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    -webkit-animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    -moz-animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
+                    -o-animation:hide 0.1s ease-in-out 0.7s - (0.1s * $i);
                 }
             }
         }
@@ -69,6 +73,19 @@
             background-color: rgb(100, 100, 100);
         }  
     }  
+}
+
+@-webkit-keyframes hide {
+    100% {-webkit-transform: perspective(100rem) rotateX(0)}
+}
+@keyframes hide {
+    100% {transform: perspective(100rem) rotateX(0)}
+}
+@-webkit-keyframes show {
+    100% {-webkit-transform: perspective(100rem) rotateX(-180deg)}
+}
+@keyframes show {
+    100% {transform: perspective(100rem) rotateX(-180deg)}
 }
 
   
