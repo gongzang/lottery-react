@@ -1,7 +1,32 @@
 import React from 'react';
 import './styles/boxMenu.scss';
 
+import MenuBox from './MenuBox';
+
 class BoxMenubar extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.mouseOverState = false;
+
+    }
+
+    promiseAnimate(item, isShow) {
+        return new Promise((resolve, reject) => {
+            if (isShow) {
+                item.className += ' show';
+                setTimeout(() => {
+                    resolve(isShow);
+                }, 100);
+            } else {
+                item.className += ' show';
+                setTimeout(() => {
+                    resolve(isShow);
+                }, 100);
+            }
+        });
+    }
 
     render() {
         const { menu: { menuData, menuList } } = this.props;
@@ -9,22 +34,10 @@ class BoxMenubar extends React.Component {
             <div className="wrap">
                 {
                     menuList && menuList.map(
-                        item => {
+                        itemKey => {
                             return (
-                                <div key={item} className="menuItem">
-                                    <h2>{menuData[item].name}</h2>
-                                    {
-                                        menuData[item].subMenu && menuData[item].subMenu.map(
-                                            subItem => {
-                                                return (
-                                                    <div key={item + '_' + subItem} className='menuItem subMenuItem'>
-                                                        <h2>{menuData[subItem].lottery_name}</h2>
-                                                    </div>
-                                                )
-                                            }
-                                        )
-                                    }
-                                </div>
+                                <MenuBox key={itemKey} menuData={menuData} menuItem={menuData[itemKey]}>
+                                </MenuBox>
                             )
                         }
                     )
