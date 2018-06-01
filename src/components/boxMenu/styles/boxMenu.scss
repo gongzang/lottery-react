@@ -1,3 +1,5 @@
+$itemHeight:3rem;
+
 
 @mixin transition($shadows...) {
     -moz-transition: $shadows;
@@ -6,9 +8,6 @@
 }
 @mixin show-transition($property:All,$duration:0.2s,$timing-function:ease-in-out) {
     @include transition($property $duration $timing-function );
-}
-@mixin hide-transition($index) {
-    @include transition(All 0.1s ease-in-out (1-(0.1s * $index)));
 }
 
 
@@ -26,12 +25,20 @@
     .menuItem{
         width:25%;
         float:left; 
-        height: 5rem;
+        height: $itemHeight;
         color: #ddd;
         text-align: center;
         &:hover{
             color: #fff;
         }
+
+        p{
+            display: block;
+            font-size: 1em;
+            font-weight: bold;
+            font-family: "微软雅黑";
+        }
+
 
 
         .subMenuItem{
@@ -51,7 +58,7 @@
 
             @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
-                    top: -5rem * $i;
+                    top: -$itemHeight * $i;
                     // opacity:1 - (0.1 * $i);
                 }
             }

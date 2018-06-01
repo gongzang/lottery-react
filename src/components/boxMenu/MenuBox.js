@@ -74,7 +74,7 @@ class MenuBox extends React.Component {
         const { menuItem: { name, subMenu }, menuData } = this.props;
         return (
             <div className="menuItem" onMouseOver={(event) => this.handlerMouseOver(event)} onMouseOut={(event) => this.handlerMouseOut(event)}>
-                <h2>{name}</h2>
+                <p>{name}</p>
                 {
                     subMenu && subMenu.map(
                         subItemKey => {
