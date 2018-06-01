@@ -12,22 +12,6 @@ class BoxMenubar extends React.Component {
 
     }
 
-    promiseAnimate(item, isShow) {
-        return new Promise((resolve, reject) => {
-            if (isShow) {
-                item.className += ' show';
-                setTimeout(() => {
-                    resolve(isShow);
-                }, 100);
-            } else {
-                item.className += ' show';
-                setTimeout(() => {
-                    resolve(isShow);
-                }, 100);
-            }
-        });
-    }
-
     render() {
         const { menu: { menuData, menuList } } = this.props;
         return (

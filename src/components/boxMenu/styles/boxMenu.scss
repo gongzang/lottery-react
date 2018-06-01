@@ -4,8 +4,8 @@
     -webkit-transition: $shadows;
     transition: $shadows;
 }
-@mixin show-transition($index, $property:All,$duration:0.1s,$timing-function:ease-in-out) {
-    @include transition($property $duration $timing-function (0.1s * $index));
+@mixin show-transition($property:All,$duration:0.3s,$timing-function:ease-in-out) {
+    @include transition($property $duration $timing-function );
 }
 @mixin hide-transition($index) {
     @include transition(All 0.1s ease-in-out (1-(0.1s * $index)));
@@ -31,24 +31,8 @@
         text-align: center;
         &:hover{
             color: #fff;
-
-            .subMenuItem {
-                -webkit-transform: perspective(100rem) rotateX(0deg);
-            
-                transform: perspective(100rem) rotateX(0deg);
-                -webkit-transform-origin: bottom;
-            -webkit-animation-fill-mode: forwards;
-
-            transform-origin: bottom;
-            animation-fill-mode: forwards;
-               
-                @for $i from 1 to 8 {
-                    &:nth-child(#{$i+1}) {
-                        @include show-transition($i);
-                    }
-                }
-            }
         }
+
 
         .subMenuItem{
             position: absolute;
@@ -62,29 +46,54 @@
             transform: perspective(100rem) rotateX(-180deg);
             transform-origin: bottom;
             animation-fill-mode: forwards;
+            color: rgba(64, 156, 195, 1);
+            @include show-transition();
 
             @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
                     top: -5rem * $i;
-                    opacity:1 - (0.1 * $i);
-                    @include hide-transition($i);
+                    // opacity:1 - (0.1 * $i);
                 }
+            }
+
+            &:hover{
+                color: #fff;
+            }
+
+            &.show{
+                
+                -webkit-transform: perspective(100rem) rotateX(0deg);
+                
+                transform: perspective(100rem) rotateX(0deg);
+                
             }
         }
     }
 
     >.menuItem:nth-child(even){
-        background-color: rgb(30, 30, 30);
+        background-color: rgb(207, 197, 185);
         .subMenuItem{
-            background-color: rgb(30, 30, 30);
+           
+            @for $i from 1 to 8 {
+                &:nth-child(#{$i+1}){
+                    background-color: rgba(207, 197, 185, 1 - (0.1 * $i));
+                }
+            }
+
         }
     }
     >.menuItem:nth-child(odd){
-        background-color: rgb(100, 100, 100);
+        background-color: rgb(124, 122, 133);
         .subMenuItem{
-            background-color: rgb(100, 100, 100);
+            @for $i from 1 to 8 {
+                &:nth-child(#{$i+1}){
+                    background-color: rgba(124, 122, 133, 1 - (0.1 * $i));
+                }
+            }
         }  
     }  
+
+    
 }
 
 
