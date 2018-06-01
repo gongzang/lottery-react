@@ -4,7 +4,7 @@
     -webkit-transition: $shadows;
     transition: $shadows;
 }
-@mixin show-transition($property:All,$duration:0.3s,$timing-function:ease-in-out) {
+@mixin show-transition($property:All,$duration:0.2s,$timing-function:ease-in-out) {
     @include transition($property $duration $timing-function );
 }
 @mixin hide-transition($index) {
@@ -27,7 +27,7 @@
         width:25%;
         float:left; 
         height: 5rem;
-        color: #aaa;
+        color: #ddd;
         text-align: center;
         &:hover{
             color: #fff;

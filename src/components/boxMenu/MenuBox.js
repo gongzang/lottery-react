@@ -2,6 +2,8 @@ import React from 'react';
 
 import MenuItem from './MenuItem';
 
+import { isParent } from '../../utils/util'
+
 class MenuBox extends React.Component {
     constructor(props) {
         super(props);
@@ -14,43 +16,56 @@ class MenuBox extends React.Component {
         );
         this.state = itemsShowClass;
         this.subMenu = subMenu;
+        this.willShowIndex = 0;
+        this.isShow = false;
+        this.promiseFlag = false;
+
     }
 
-    promiseAnimate(index, isShow) {
+    promiseAnimate() {
         const _self = this;
         return new Promise((resolve, reject) => {
             _self.setState({
                 ..._self.state,
-                [_self.subMenu[index]]: (isShow ? 'show' : '')
+                [_self.subMenu[this.willShowIndex]]: (this.isShow ? 'show' : '')
             });
+            this.willShowIndex += (this.isShow?1:-1);
             setTimeout(() => {
-                resolve(isShow);
-            }, 300);
+                resolve();
+            }, 200);
         });
     }
 
     handlerMouseOver(event) {
-        let index = 0;
-        const _self = this;
-        function showOrHideItems(showFlag) {
-            if (index < _self.subMenu.length) {
-                _self.promiseAnimate(index++, showFlag)
-                    .then(showOrHideItems);
-            }
+        this.isShow = true;
+        if(this.promiseFlag) {
+            return;
         }
-        showOrHideItems(true);
+        this.promiseFlag = true;
+        
+        this.showOrHideItems();
     }
     handlerMouseOut(event) {
-        console.log(event);
-        let index = this.subMenu.length;
-        const _self = this;
-        function showOrHideItems(showFlag) {
-            if (index >= 0) {
-                _self.promiseAnimate(index--, showFlag)
-                    .then(showOrHideItems);
-            }
+        if (isParent(event.target, this)) {
+            return;
         }
-        showOrHideItems(false);
+        this.isShow = false;
+        if(this.promiseFlag) {
+            return;
+        }
+        this.promiseFlag = true;
+        
+        this.showOrHideItems();
+    }
+
+    showOrHideItems() {
+        if ((!this.isShow && this.willShowIndex >= 0) || (this.isShow && this.willShowIndex < this.subMenu.length)) {
+
+            this.promiseAnimate()
+                .then(()=>this.showOrHideItems());
+        } else {
+            this.promiseFlag = false;
+        }
     }
 
 
