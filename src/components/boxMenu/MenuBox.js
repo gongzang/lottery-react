@@ -25,24 +25,28 @@ class MenuBox extends React.Component {
     promiseAnimate() {
         const _self = this;
         return new Promise((resolve, reject) => {
-            _self.setState({
-                ..._self.state,
-                [_self.subMenu[this.willShowIndex]]: (this.isShow ? 'show' : '')
-            });
-            this.willShowIndex += (this.isShow?1:-1);
-            setTimeout(() => {
-                resolve();
-            }, 200);
+            if ((!_self.isShow && _self.willShowIndex >= 0) || (_self.isShow && _self.willShowIndex < _self.subMenu.length)) {
+                _self.setState({
+                    ..._self.state,
+                    [_self.subMenu[this.willShowIndex]]: (this.isShow ? 'show' : '')
+                });
+                this.willShowIndex += (this.isShow ? 1 : -1);
+                setTimeout(() => {
+                    resolve();
+                }, 200);
+            } else {
+                reject();
+            }
         });
     }
 
     handlerMouseOver(event) {
         this.isShow = true;
-        if(this.promiseFlag) {
+        if (this.promiseFlag) {
             return;
         }
         this.promiseFlag = true;
-        
+
         this.showOrHideItems();
     }
     handlerMouseOut(event) {
@@ -50,22 +54,17 @@ class MenuBox extends React.Component {
             return;
         }
         this.isShow = false;
-        if(this.promiseFlag) {
+        if (this.promiseFlag) {
             return;
         }
         this.promiseFlag = true;
-        
+
         this.showOrHideItems();
     }
 
     showOrHideItems() {
-        if ((!this.isShow && this.willShowIndex >= 0) || (this.isShow && this.willShowIndex < this.subMenu.length)) {
-
-            this.promiseAnimate()
-                .then(()=>this.showOrHideItems());
-        } else {
-            this.promiseFlag = false;
-        }
+        this.promiseAnimate()
+            .then(() => this.showOrHideItems(), () => this.promiseFlag = false);
     }
 
 
