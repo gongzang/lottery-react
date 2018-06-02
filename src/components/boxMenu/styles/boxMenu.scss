@@ -1,4 +1,4 @@
-$itemHeight:3rem;
+$itemHeight:2rem;
 
 
 @mixin transition($shadows...) {
@@ -10,10 +10,10 @@ $itemHeight:3rem;
     @include transition($property $duration $timing-function );
 }
 @mixin  item-background-color1($a:1) {
-    background-color: rgba(207, 197, 185, $a);
+    background-color: rgba(0, 0, 0, $a);
 }
 @mixin  item-background-color2($a:1) {
-    background-color: rgba(124, 122, 133, $a);
+    background-color: rgba(0, 0, 0, $a);
 }
 
 
@@ -23,16 +23,19 @@ $itemHeight:3rem;
 .wrap{
     width: 80rem;
     position: fixed;  
-    bottom: 0;
+    bottom: 1rem;
     z-index: 100;
-    margin-left: auto;
-    margin-right: auto;
+    left: 50%;
+
+    margin-left: -40rem;
+
 
     .menuItem{
-        width:25%;
+        width:24%;
         float:left; 
         height: $itemHeight;
         color: #ddd;
+        border: 1px solid #fff;
         text-align: center;
         &:hover{
             color: #fff;
@@ -41,6 +44,9 @@ $itemHeight:3rem;
         p{
             display: block;
             font-size: 1em;
+            line-height: 1rem;
+            -webkit-margin-before: 0.5em;
+            -webkit-margin-after: 0.5em;
             font-weight: bold;
             font-family: "微软雅黑";
         }
@@ -75,32 +81,32 @@ $itemHeight:3rem;
 
             &.show{
                 
-                -webkit-transform: perspective(100rem) rotateX(0deg);
+                -webkit-transform: perspective(50rem) rotateX(0deg);
                 
-                transform: perspective(100rem) rotateX(0deg);
+                transform: perspective(50rem) rotateX(0deg);
                 
             }
         }
     }
 
     >.menuItem:nth-child(even){
-        @include item-background-color1();
+        @include item-background-color1(0);
         .subMenuItem{
            
             @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
-                    @include item-background-color1( 1 - (0.1 * $i));
+                    @include item-background-color1( 0.8 - (0.1 * $i));
                 }
             }
 
         }
     }
     >.menuItem:nth-child(odd){
-        @include item-background-color2();
+        @include item-background-color2(0);
         .subMenuItem{
             @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
-                    @include item-background-color2( 1 - (0.1 * $i));
+                    @include item-background-color2(0.8 - (0.1 * $i));
                 }
             }
         }  

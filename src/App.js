@@ -10,6 +10,18 @@ import * as ItemsActions from './actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import homeBackground from './img/home_background3.jpg'
+
+const divStyle = {
+    backgroundImage: 'url(' + homeBackground + ')',
+    position: 'absolute',
+    left:0,
+    right:0,
+    'background-size':'cover',
+    top: 0,
+    bottom: 0
+};
+
 class App extends Component {
   componentWillMount() {
     var shelf = this;
@@ -21,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <Router props={this.props}>
-        <div className="center">
+        <div className="center"  style={divStyle}>
           <Switch>
             <Route path="/" component={HomePage} />
           </Switch>
