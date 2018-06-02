@@ -9,6 +9,12 @@ $itemHeight:3rem;
 @mixin show-transition($property:All,$duration:0.2s,$timing-function:ease-in-out) {
     @include transition($property $duration $timing-function );
 }
+@mixin  item-background-color1($a:1) {
+    background-color: rgba(207, 197, 185, $a);
+}
+@mixin  item-background-color2($a:1) {
+    background-color: rgba(124, 122, 133, $a);
+}
 
 
 
@@ -78,23 +84,23 @@ $itemHeight:3rem;
     }
 
     >.menuItem:nth-child(even){
-        background-color: rgb(207, 197, 185);
+        @include item-background-color1();
         .subMenuItem{
            
             @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
-                    background-color: rgba(207, 197, 185, 1 - (0.1 * $i));
+                    @include item-background-color1( 1 - (0.1 * $i));
                 }
             }
 
         }
     }
     >.menuItem:nth-child(odd){
-        background-color: rgb(124, 122, 133);
+        @include item-background-color2();
         .subMenuItem{
             @for $i from 1 to 8 {
                 &:nth-child(#{$i+1}){
-                    background-color: rgba(124, 122, 133, 1 - (0.1 * $i));
+                    @include item-background-color2( 1 - (0.1 * $i));
                 }
             }
         }  
