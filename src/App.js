@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import BoxMenubar from './components/boxMenu/BoxMenubar';
 
-import HomePage from './pages/Home'
+import HomePage from './pages/Home';
+import ResultPage from './pages/Result';
 import './App.css';
 import { get } from './utils/request';
 
@@ -33,9 +34,10 @@ class App extends Component {
   render() {
     return (
       <Router props={this.props}>
-        <div className="center"  style={divStyle}>
+        <div className="center App"  style={divStyle}>
           <Switch>
-            <Route path="/" component={HomePage} />
+            <Route path="/" component={ResultPage} />
+            {/* <Route path="/" component={HomePage} /> */}
           </Switch>
           <BoxMenubar menu = {this.props.menu}>
           </BoxMenubar>
