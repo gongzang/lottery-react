@@ -4,7 +4,7 @@ import BoxMenubar from './components/boxMenu/BoxMenubar';
 
 import HomePage from './pages/Home';
 import ResultPage from './pages/Result';
-import './App.css';
+import './App.scss';
 import { get } from './utils/request';
 
 import * as ItemsActions from './actions';
