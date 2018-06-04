@@ -13,7 +13,7 @@ class NixElement extends React.Component {
             <div class="nixbg">
                 {letters.map((letter) => {
                     return (
-                        <div className={`nix ${letter === this.props.ballNoDigit ? 'nix_open' : ''}`}>{letter}</div>
+                        <div className={`nix ${letter == this.props.ballNoDigit ? 'nix_open' : ''}`}>{letter}</div>
                     );
                 })}
             </div>
