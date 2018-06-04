@@ -16,8 +16,8 @@ class Headline extends React.Component {
     render() {
         const { staticWords, options, wrapperWords, wrapperStyle, showingWord, handleAnimationend } = this.props;
         return (
-            <h1 className={`cd-headline ${options.hasClip ? 'clip' : ''} ${options.hasType ? 'type' : ''}`}>
-                <span>{staticWords}</span>
+            <p className={`cd-headline ${options.hasClip ? 'clip' : ''} ${options.hasType ? 'type' : ''}`}>
+                <span className='staticTip'>{staticWords}</span>
                 <span id="spanWrapper" class="cd-words-wrapper" style={wrapperStyle} onTransitionEnd={handleAnimationend}>
                     {wrapperWords.map((word) => {
                         return (
@@ -25,7 +25,7 @@ class Headline extends React.Component {
                         );
                     })}
                 </span>
-            </h1>
+            </p>
         );
     }
 }
