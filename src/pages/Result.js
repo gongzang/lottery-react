@@ -17,7 +17,7 @@ class Result extends React.Component {
     render() {
         const {ballResult,wrapperWords} = this.state;
         return (
-            <div>
+            <div className='ResultDiv'>
                 <Nix ballResult={ballResult} />
                 <Headline staticWords={'123456'} options={{ hasClip: true }} wrapperWords={wrapperWords} />
             </div>
