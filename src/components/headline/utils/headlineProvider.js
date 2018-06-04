@@ -147,7 +147,6 @@ function headlineProvider(headlineData) {
                             width: '2px'
                         }
                     });
-                    console.log(this.state);
                 }
             }
 
@@ -163,7 +162,6 @@ function headlineProvider(headlineData) {
                             width: `${newWidth}px`
                         }
                     });
-                    console.log(this.state);
                 }
             }
 
