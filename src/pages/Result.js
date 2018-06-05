@@ -33,7 +33,7 @@ class Result extends React.Component {
             <div className='ResultDiv'>
                 <h1 className='resultTitle'>{lotteryTitle}</h1>
                 <Nix ballResult={ballResult} />
-                <Headline staticWords='附加信息  ' options={{ hasClip: true }} wrapperWords={wrapperWords} />
+                <Headline staticWords='' options={{ hasClip: true }} wrapperWords={wrapperWords} />
             </div>
         );
     }

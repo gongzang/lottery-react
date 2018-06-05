@@ -11,7 +11,7 @@ function headlineProvider(headlineData) {
                 width: '2px',
                 transition: 'all',
                 WebkitTransition: 'all', // note the capital 'W' here
-                msTransition:'all'
+                msTransition: 'all'
             }
         };
 
@@ -95,8 +95,7 @@ function headlineProvider(headlineData) {
                 if (this.options.hasClip) {
                     // let spanWrapper = document.getElementById('spanWrapper');
                     // if(spanWrapper && spanWrapper.children && spanWrapper.children.length > 0){
-                        this.switchWord(this.takeNext());
-                        this.showWord(this.getShowingB());
+                    this.switchWord(this.takeNext());
                     // }
 
                     // } else if (!this.options.type) {
@@ -125,24 +124,25 @@ function headlineProvider(headlineData) {
                 if (this.animateType === 'show') {
                     setTimeout(
                         () => {
-                            this.hideWord(this.getShowingB())
+                            this.hideWord()
                         },
                         this.options.revealAnimationDelay
                     );
                 } else if (this.animateType === 'hide') {
                     var nextWord = this.takeNext();
                     this.switchWord(nextWord);
-                    this.showWord(this.getShowingB());
+
                 }
             }
 
-            hideWord(target) {
+            hideWord() {
                 this.animateType = 'hide';
                 var nextWord = this.takeNext();
 
                 if (this.options.hasClip) {
                     this.setState({
                         wrapperStyle: {
+                            ...this.state.wrapperStyle,
                             transition: `width ${this.options.revealDuration}ms`,
                             width: '2px'
                         }
@@ -156,16 +156,21 @@ function headlineProvider(headlineData) {
 
                     let newWidth = parseInt(getDefaultStyle(target, 'width')) + 10;
 
+                    let r = Math.floor(Math.random() * 255);
+                    let g = Math.floor(Math.random() * 255);
+                    let b = Math.floor(Math.random() * 255);
+                    let color = 'rgba(' + r + ',' + g + ',' + b + ',0.8)';
                     this.setState({
                         wrapperStyle: {
                             transition: `width ${this.options.revealDuration}ms`,
-                            width: `${newWidth}px`
+                            width: `${newWidth}px`,
+                            color
                         }
                     });
                 }
             }
 
-            getShowingB(){
+            getShowingB() {
                 const { showingWord } = this.state;
                 const { wrapperWords } = this.props;
                 let index = -1;
@@ -175,7 +180,7 @@ function headlineProvider(headlineData) {
                     return undefined;
                 }
                 let spanWrapper = document.getElementById('spanWrapper');
-                if(spanWrapper && spanWrapper.children && spanWrapper.children.length > 0){
+                if (spanWrapper && spanWrapper.children && spanWrapper.children.length > 0) {
                     this.showWord(spanWrapper.children[0]);
                     if (index === -1) return spanWrapper.children[0];
                     else return spanWrapper.children[index];
@@ -198,7 +203,7 @@ function headlineProvider(headlineData) {
             switchWord(newWord) {
                 this.setState({
                     showingWord: newWord
-                });
+                }, () => this.showWord(this.getShowingB()));
 
             }
 
