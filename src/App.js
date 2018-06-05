@@ -36,8 +36,8 @@ class App extends Component {
       <Router props={this.props}>
         <div className="center App"  style={divStyle}>
           <Switch>
-            <Route path="/" component={ResultPage} />
-            {/* <Route path="/" component={HomePage} /> */}
+            <Route path="/results/:lottery_id" component={ResultPage} />
+            <Route path="/" component={HomePage} />
           </Switch>
           <BoxMenubar menu = {this.props.menu}>
           </BoxMenubar>

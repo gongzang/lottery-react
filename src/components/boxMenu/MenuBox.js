@@ -70,7 +70,7 @@ class MenuBox extends React.Component {
 
 
     render() {
-        const { menuItem: { name, subMenu }, menuData } = this.props;
+        const { menuItem: { name, subMenu,url }, menuData } = this.props;
         return (
             <div className="menuItem" onMouseOver={(event) => this.handlerMouseOver(event)} onMouseOut={(event) => this.handlerMouseOut(event)}>
                 <p>{name}</p>
@@ -78,7 +78,7 @@ class MenuBox extends React.Component {
                     subMenu && subMenu.map(
                         subItemKey => {
                             return (
-                                <MenuItem key={name + '_' + subItemKey} showClassName={this.state[subItemKey]} subItem={menuData[subItemKey]}>
+                                <MenuItem url={url} key={name + '_' + subItemKey} showClassName={this.state[subItemKey]} subItem={menuData[subItemKey]}>
                                 </MenuItem>
                             )
                         }

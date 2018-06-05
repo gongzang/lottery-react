@@ -15,14 +15,20 @@ class Result extends React.Component {
             wrapperWords: ['789', '987', 'abc', 'def']
         };
     }
+    componentWillReceiveProps(nextProps) {
+        this.initResult(nextProps.match.params.lottery_id);
+    }
     componentWillMount() {
-        var shelf = this;
-        get(`/lottery/queryNewest?lottery_id=${'ssq'}`)
+        this.initResult(this.props.match.params.lottery_id);
+    }
+
+    initResult(lottery_id) {
+        get(`/lottery/queryNewest?lottery_id=${lottery_id}`)
             .then((res) => {
                 this.setState({
-                    lotteryTitle: res.lottery_name||'',
-                    ballResult: res.lotteryResArr||[],
-                    wrapperWords: res.lotteryMessage||[]
+                    lotteryTitle: res.lottery_name || '',
+                    ballResult: res.lotteryResArr || [],
+                    wrapperWords: res.lotteryMessage || []
                 });
             });
     }

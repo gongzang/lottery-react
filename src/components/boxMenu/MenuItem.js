@@ -1,12 +1,12 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 class menuItem extends React.Component {
 
     render() {
-        const { subItem: { lottery_name }, showClassName } = this.props;
+        const { subItem: { lottery_name,lottery_id }, url, showClassName } = this.props;
         return (
             <div className={`menuItem subMenuItem ${showClassName}`}>
-                <p>{lottery_name}</p>
+                <NavLink to={`/${url}/${lottery_id}`}>{lottery_name}</NavLink>
             </div>
         );
     }
