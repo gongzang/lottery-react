@@ -1,47 +1,41 @@
 $itemHeight:2rem;
-
-
 @mixin transition($shadows...) {
     -moz-transition: $shadows;
     -webkit-transition: $shadows;
     transition: $shadows;
 }
-@mixin show-transition($property:All,$duration:0.2s,$timing-function:ease-in-out) {
-    @include transition($property $duration $timing-function );
+
+@mixin show-transition($property:All, $duration:0.2s, $timing-function:ease-in-out) {
+    @include transition($property $duration $timing-function);
 }
-@mixin  item-background-color1($a:1) {
+
+@mixin item-background-color1($a:1) {
     background-color: rgba(0, 0, 0, $a);
 }
-@mixin  item-background-color2($a:1) {
+
+@mixin item-background-color2($a:1) {
     background-color: rgba(0, 0, 0, $a);
 }
 
-
-
-
-
-.wrap{
+.wrap {
     width: 80rem;
-    position: fixed;  
+    position: fixed;
     bottom: 1rem;
     z-index: 100;
     left: 50%;
-
     margin-left: -40rem;
-
-
-    .menuItem{
-        width:24%;
-        float:left; 
+    .menuItem {
+        width: 24%;
+        float: left;
         height: $itemHeight;
         color: #ddd;
         border: 1px solid #fff;
         text-align: center;
-        &:hover{
+        &:hover {
             color: #fff;
         }
-
-        a,p{
+        a,
+        p {
             display: block;
             font-size: 1em;
             line-height: 1rem;
@@ -50,71 +44,50 @@ $itemHeight:2rem;
             font-weight: bold;
             font-family: "微软雅黑";
         }
-
-
-
-        .subMenuItem{
+        .subMenuItem {
             position: absolute;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-
             -webkit-transform: perspective(100rem) rotateX(-180deg);
             -webkit-transform-origin: bottom;
             -webkit-animation-fill-mode: forwards;
-
             transform: perspective(100rem) rotateX(-180deg);
             transform-origin: bottom;
             animation-fill-mode: forwards;
             color: rgba(64, 156, 195, 1);
             @include show-transition();
-
             @for $i from 1 to 8 {
-                &:nth-child(#{$i+1}){
-                    top: -$itemHeight * $i;
-                    // opacity:1 - (0.1 * $i);
+                &:nth-child(#{$i+1}) {
+                    top: -$itemHeight * $i; // opacity:1 - (0.1 * $i);
                 }
             }
-
-            &:hover{
+            &:hover {
                 color: #fff;
             }
-
-            &.show{
-                
+            &.show {
                 -webkit-transform: perspective(50rem) rotateX(0deg);
-                
                 transform: perspective(50rem) rotateX(0deg);
-                
             }
         }
     }
-
-    >.menuItem:nth-child(even){
+    >.menuItem:nth-child(even) {
         @include item-background-color1(0);
-        .subMenuItem{
-           
+        .subMenuItem {
             @for $i from 1 to 8 {
-                &:nth-child(#{$i+1}){
+                &:nth-child(#{$i+1}) {
                     @include item-background-color1( 0.8 - (0.1 * $i));
                 }
             }
-
         }
     }
-    >.menuItem:nth-child(odd){
+    >.menuItem:nth-child(odd) {
         @include item-background-color2(0);
-        .subMenuItem{
+        .subMenuItem {
             @for $i from 1 to 8 {
-                &:nth-child(#{$i+1}){
+                &:nth-child(#{$i+1}) {
                     @include item-background-color2(0.8 - (0.1 * $i));
                 }
             }
-        }  
-    }  
-
-    
+        }
+    }
 }
-
-
-  
-

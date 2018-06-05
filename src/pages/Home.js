@@ -1,4 +1,5 @@
 import React from 'react';
+import PageBox from '../components/pageBox/PageBox';
 
 
 class Home extends React.Component {
@@ -10,6 +11,7 @@ class Home extends React.Component {
         return (
             <div>
                 This new home!
+                <PageBox/>
             </div>
         );
     }
