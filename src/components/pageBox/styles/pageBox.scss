@@ -1,7 +1,3 @@
-.demo {
-    padding: 2em 0;
-}
-
 .pagination-outer {
     text-align: center;
 }
@@ -9,62 +5,59 @@
 .pagination {
     display: inline-flex;
     position: relative;
-    li{
+    li {
         display: inline;
-        :after, :before {
+        :after,
+        :before {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
+        a.page-link {
+            float: left;
+            margin-left: -1px;
+            text-decoration: none; // width: 45px;
+            // height: 45px;
+            line-height: 45px;
+            background: transparent;
+            border: none;
+            padding: 0 1rem;
+            margin-right: 12px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #d61838;
+            position: relative;
+            transition: all 0.3s ease 0s;
+            &:before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                border: 2px solid #d61838;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                transition: border-top-width 0.1s ease 0.2s, height 0.2s ease 0.1s, width 0.2s ease 0s, margin 0.2s ease 0s;
+            }
+        }
     }
 }
 
-.pagination li a.page-link {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin-right: 12px;
-    font-size: 22px;
-    font-weight: 600;
-    color: #d61838;
-    position: relative;
-    transition: all 0.3s ease 0s;
-}
-
-.pagination li:last-child a.page-link {
-    margin-right: 0;
-}
-
+// .pagination li:last-child a.page-link {
+//     margin-right: 0;
+// }
 .pagination li.active a.page-link,
 .pagination li a.page-link:hover,
 .pagination li.active a.page-link:hover {
     color: #d61838;
     border: none;
     background: transparent;
-}
-
-.pagination li a.page-link:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    border: 2px solid #d61838;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transition: border-top-width 0.1s ease 0.2s, height 0.2s ease 0.1s, width 0.2s ease 0s, margin 0.2s ease 0s;
-}
-
-.pagination li.active a.page-link:before,
-.pagination li a.page-link:hover:before,
-.pagination li.active a.page-link:hover:before {
-    width: 60%;
-    height: 0;
-    border-width: 0 2px 2px;
-    margin: 0 20%;
-    transition: border-top-width 0.1s ease 0s, height 0.2s ease 0.1s, width 0.2s ease 0.2s, margin 0.2s ease 0.2s;
+    &:hover:before {
+        width: 60%;
+        height: 0;
+        border-width: 0 2px 2px;
+        margin: 0 20%;
+        transition: border-top-width 0.1s ease 0s, height 0.2s ease 0.1s, width 0.2s ease 0.2s, margin 0.2s ease 0.2s;
+    }
 }
 
 @media only screen and (max-width: 479px) {
@@ -75,4 +68,3 @@
         display: inline-block;
     }
 }
-
