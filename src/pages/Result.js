@@ -4,6 +4,7 @@ import '../styles/result.scss';
 import Headline from '../components/headline/Headline';
 import Nix from '../components/nix/Nix';
 import { get } from '../utils/request';
+import PageBox from '../components/pageBox/PageBox';
 
 
 class Result extends React.Component {
@@ -26,6 +27,8 @@ class Result extends React.Component {
         get(`/lottery/queryNewest?lottery_id=${lottery_id}`)
             .then((res) => {
                 this.setState({
+                    maxNo: res.maxNo,
+                    lotteryNo: res.lottery_no,
                     lotteryTitle: res.lottery_name || '',
                     ballResult: res.lotteryResArr || [],
                     wrapperWords: res.lotteryMessage || []
@@ -34,12 +37,13 @@ class Result extends React.Component {
     }
 
     render() {
-        const { ballResult, wrapperWords, lotteryTitle } = this.state;
+        const { ballResult, wrapperWords, lotteryTitle, maxNo, lotteryNo } = this.state;
         return (
             <div className='ResultDiv'>
                 <h1 className='resultTitle'>{lotteryTitle}</h1>
                 <Nix ballResult={ballResult} />
                 <Headline staticWords='' options={{ hasClip: true }} wrapperWords={wrapperWords} />
+                <PageBox sequence='reverseSequence' beforeLabel='第' afterLabel='期' maxPage={maxNo} currPage={lotteryNo} />
             </div>
         );
     }

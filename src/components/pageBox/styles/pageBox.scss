@@ -5,6 +5,7 @@
 .pagination {
     display: inline-flex;
     position: relative;
+    align-self:center;
     li {
         display: inline;
         :after,
@@ -16,14 +17,13 @@
         a.page-link {
             float: left;
             margin-left: -1px;
-            text-decoration: none; // width: 45px;
-            // height: 45px;
-            line-height: 45px;
+            text-decoration: none; 
+            // line-height: 45px;
             background: transparent;
             border: none;
-            padding: 0 1rem;
+            padding: .5rem;
             margin-right: 12px;
-            font-size: 22px;
+            font-size: 1rem;
             font-weight: 600;
             color: #d61838;
             position: relative;
@@ -51,7 +51,7 @@
     color: #d61838;
     border: none;
     background: transparent;
-    &:hover:before {
+    &:before {
         width: 60%;
         height: 0;
         border-width: 0 2px 2px;

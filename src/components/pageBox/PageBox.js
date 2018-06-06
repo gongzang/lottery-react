@@ -1,45 +1,84 @@
 import React from 'react';
 
 import './styles/pageBox.scss';
+import PageItem from './PageItem';
+//正序 default
+const SEQUENCE_TYPE_POSITIVE = ' positiveSequence';
+//倒序
+const SEQUENCE_TYPE_REVERSE = 'reverseSequence';
+//默认最大页数
+const MAX_PAGE = 1024;
 
+const initState = {
+    currPage: 1,
+    pageSize: 5,
+    maxPage: MAX_PAGE
+};
 
 
 class PageBox extends React.Component {
 
     constructor(props) {
         super(props);
+        const { currPage, pageSize, maxPage } = props;
+        this.state = {
+            currPage:currPage||initState.currPage,
+            currPage:pageSize||initState.pageSize,
+            currPage:maxPage||initState.maxPage
+        };
+    }
 
+    componentWillReceiveProps(nextProps){
+        const { currPage, pageSize, maxPage } = nextProps;
+        console.log(nextProps);
+        this.setState({
+            currPage:currPage||initState.currPage,
+            pageSize:pageSize||initState.pageSize,
+            maxPage:maxPage||initState.maxPage
+        });
     }
 
     render() {
+        const { currPage, pageSize, maxPage } = this.state;
+        const { beforeLabel, afterLabel, sequence } = this.props;
+        let pages = [currPage];
+        let count = 1;
+        let flag = false;
+        while (pages.length < Math.min(5, maxPage)) {
+            let indexPage = 0;
+            indexPage = !flag ? (currPage - count) : (currPage + count);
+            if (indexPage >= 1 && indexPage <= maxPage) {
+                pages.push(indexPage);
+            }
+            if (flag) {
+                count++;
+            }
+            flag = !flag;
+        }
+        pages.sort((a, b) => {
+            switch (sequence) {
+                case SEQUENCE_TYPE_POSITIVE:
+                    return a - b;
+                case SEQUENCE_TYPE_REVERSE:
+                    return b - a;
+                default:
+                    return a - b;
+            }
+        });
         return (
-            <div class="demo">
-                <div class="container">
-                    <div class="row pad-15">
-                        <div class="col-md-12">
-                            <nav class="pagination-outer" aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1234</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2567</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ul className="pagination">
+                <PageItem className="page-item" pageNo="&laquo;" />
+
+                {pages && pages.map(
+                    pageNo => {
+                        return (
+                            <PageItem class="page-item" pageNo={pageNo} beforeLabel={beforeLabel} afterLabel={afterLabel} currPage={currPage} />
+                        )
+                    }
+                )
+                }
+                <PageItem className="page-item" pageNo="&raquo;" />
+            </ul>
         );
     }
 }
