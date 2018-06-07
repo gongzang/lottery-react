@@ -11,7 +11,6 @@ class PageItem extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         const { pageNo, beforeLabel, afterLabel, currPage, match, pageType } = this.props;
         let text = pageNo;
         switch (pageType) {

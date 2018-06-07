@@ -30,7 +30,6 @@ class PageBox extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const { currPage, pageSize, maxPage } = nextProps;
-        console.log(nextProps);
         this.setState({
             currPage: currPage || initState.currPage,
             pageSize: pageSize || initState.pageSize,
