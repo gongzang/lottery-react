@@ -22,19 +22,19 @@ class PageBox extends React.Component {
         super(props);
         const { currPage, pageSize, maxPage } = props;
         this.state = {
-            currPage:currPage||initState.currPage,
-            currPage:pageSize||initState.pageSize,
-            currPage:maxPage||initState.maxPage
+            currPage: currPage || initState.currPage,
+            currPage: pageSize || initState.pageSize,
+            currPage: maxPage || initState.maxPage
         };
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
         const { currPage, pageSize, maxPage } = nextProps;
         console.log(nextProps);
         this.setState({
-            currPage:currPage||initState.currPage,
-            pageSize:pageSize||initState.pageSize,
-            maxPage:maxPage||initState.maxPage
+            currPage: currPage || initState.currPage,
+            pageSize: pageSize || initState.pageSize,
+            maxPage: maxPage || initState.maxPage
         });
     }
 
@@ -65,19 +65,20 @@ class PageBox extends React.Component {
                     return a - b;
             }
         });
+        const nowIndex = pages.indexOf(currPage);
         return (
             <ul className="pagination">
-                <PageItem className="page-item" pageNo="&laquo;" />
+                <PageItem {...this.props} className="page-item" pageType='left' pageNo={pages[(nowIndex - 1)>0?(nowIndex - 1):nowIndex]} />
 
                 {pages && pages.map(
                     pageNo => {
                         return (
-                            <PageItem class="page-item" pageNo={pageNo} beforeLabel={beforeLabel} afterLabel={afterLabel} currPage={currPage} />
+                            <PageItem {...this.props} class="page-item" pageNo={pageNo} beforeLabel={beforeLabel} afterLabel={afterLabel} currPage={currPage} />
                         )
                     }
                 )
                 }
-                <PageItem className="page-item" pageNo="&raquo;" />
+                <PageItem {...this.props} className="page-item" pageType='right' pageNo={pages[(nowIndex + 1)<pages.length?(nowIndex + 1):nowIndex]} />
             </ul>
         );
     }

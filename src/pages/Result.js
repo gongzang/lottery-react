@@ -43,7 +43,7 @@ class Result extends React.Component {
                 <h1 className='resultTitle'>{lotteryTitle}</h1>
                 <Nix ballResult={ballResult} />
                 <Headline staticWords='' options={{ hasClip: true }} wrapperWords={wrapperWords} />
-                <PageBox sequence='reverseSequence' beforeLabel='第' afterLabel='期' maxPage={maxNo} currPage={lotteryNo} />
+                <PageBox {...this.props} sequence='reverseSequence' beforeLabel='第' afterLabel='期' maxPage={maxNo} currPage={lotteryNo} />
             </div>
         );
     }

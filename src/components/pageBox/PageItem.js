@@ -11,11 +11,22 @@ class PageItem extends React.Component {
     }
 
     render() {
-        const { pageNo, beforeLabel, afterLabel, currPage } = this.props;
+        console.log(this.props);
+        const { pageNo, beforeLabel, afterLabel, currPage, match, pageType } = this.props;
+        let text = pageNo;
+        switch (pageType) {
+            case "left":
+                text = "<<";
+                break;
+            case "right":
+                text = ">>";
+                break;
+        }
+        const showText = `${beforeLabel || ''}${text}${afterLabel || ''}`;
         return (
             <li className={`page-item ${pageNo === currPage ? 'active' : ''}`}>
-                <NavLink to="#" className='page-link'>
-                    {`${beforeLabel || ''}${pageNo}${afterLabel || ''}`}
+                <NavLink to={`${match.url}/${pageNo}`} className='page-link'>
+                    {showText}
                 </NavLink>
             </li>
         );
