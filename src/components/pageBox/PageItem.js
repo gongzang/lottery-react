@@ -24,7 +24,7 @@ class PageItem extends React.Component {
         }
         const showText = `${beforeLabel || ''}${text}${afterLabel || ''}`;
         return (
-            <li className={`page-item ${pageNo === currPage ? 'active' : ''}`}>
+            <li className={`page-item ${pageNo == currPage ? 'active' : ''}`}>
                 <NavLink to={`${match.url}/${pageNo}`} className='page-link'>
                     {showText}
                 </NavLink>

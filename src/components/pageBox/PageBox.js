@@ -40,7 +40,7 @@ class PageBox extends React.Component {
 
     render() {
         const { currPage, pageSize, maxPage } = this.state;
-        const { beforeLabel, afterLabel, sequence } = this.props;
+        const { beforeLabel, afterLabel, sequence, match } = this.props;
         let pages = [currPage];
         let count = 1;
         let flag = false;
@@ -68,17 +68,17 @@ class PageBox extends React.Component {
         const nowIndex = pages.indexOf(currPage);
         return (
             <ul className="pagination">
-                <PageItem {...this.props} className="page-item" pageType='left' pageNo={pages[(nowIndex - 1)>0?(nowIndex - 1):nowIndex]} />
+                <PageItem match={match} className="page-item" pageType='left' pageNo={pages[(nowIndex - 1) > 0 ? (nowIndex - 1) : nowIndex]} currPage={currPage} />
 
                 {pages && pages.map(
                     pageNo => {
                         return (
-                            <PageItem {...this.props} class="page-item" pageNo={pageNo} beforeLabel={beforeLabel} afterLabel={afterLabel} currPage={currPage} />
+                            <PageItem match={match} class="page-item" pageNo={pageNo} beforeLabel={beforeLabel} afterLabel={afterLabel} currPage={currPage} />
                         )
                     }
                 )
                 }
-                <PageItem {...this.props} className="page-item" pageType='right' pageNo={pages[(nowIndex + 1)<pages.length?(nowIndex + 1):nowIndex]} />
+                <PageItem match={match} className="page-item" pageType='right' pageNo={pages[(nowIndex + 1) < pages.length ? (nowIndex + 1) : nowIndex]} currPage={currPage} />
             </ul>
         );
     }
