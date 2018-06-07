@@ -11,7 +11,6 @@ class Home extends React.Component {
         return (
             <div>
                 This new home!
-                <PageBox sequence='reverseSequence' beforeLabel='第' afterLabel='页'/>
             </div>
         );
     }

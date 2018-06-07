@@ -17,23 +17,34 @@ class Result extends React.Component {
         };
     }
     componentWillReceiveProps(nextProps) {
-        this.initResult(nextProps.match.params.lottery_id);
+        this.initResult(nextProps.match.params.lottery_id, nextProps.match.params.lottery_no);
     }
     componentWillMount() {
-        this.initResult(this.props.match.params.lottery_id);
+        this.initResult(this.props.match.params.lottery_id, this.props.match.params.lottery_no);
     }
 
-    initResult(lottery_id) {
-        get(`/lottery/queryNewest?lottery_id=${lottery_id}`)
-            .then((res) => {
-                this.setState({
-                    maxNo: res.maxNo,
-                    lotteryNo: res.lottery_no,
-                    lotteryTitle: res.lottery_name || '',
-                    ballResult: res.lotteryResArr || [],
-                    wrapperWords: res.lotteryMessage || []
+    initResult(lottery_id, lottery_no) {
+        if (lottery_no === 'newest') {
+            get(`/lottery/queryNewest?lottery_id=${lottery_id}`)
+                .then((res) => {
+                    this.setResToState(res);
                 });
-            });
+        } else {
+            get(`/lottery/queryLotteryResult?lottery_id=${lottery_id}&lottery_no=${lottery_no}`)
+                .then((res) => {
+                    this.setResToState(res);
+                });
+        }
+    }
+
+    setResToState(res) {
+        this.setState({
+            maxNo: res.maxNo,
+            lotteryNo: res.lottery_no,
+            lotteryTitle: res.lottery_name || '',
+            ballResult: res.lotteryResArr || [],
+            wrapperWords: res.lotteryMessage || []
+        });
     }
 
     render() {

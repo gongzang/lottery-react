@@ -6,7 +6,7 @@ class menuItem extends React.Component {
         const { subItem: { lottery_name,lottery_id }, url, showClassName } = this.props;
         return (
             <div className={`menuItem subMenuItem ${showClassName}`}>
-                <NavLink to={`/${url}/${lottery_id}`}>{lottery_name}</NavLink>
+                <NavLink to={`/${url}/${lottery_id}/newest`}>{lottery_name}</NavLink>
             </div>
         );
     }
