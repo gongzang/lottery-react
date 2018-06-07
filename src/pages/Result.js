@@ -5,6 +5,7 @@ import Headline from '../components/headline/Headline';
 import Nix from '../components/nix/Nix';
 import { get } from '../utils/request';
 import PageBox from '../components/pageBox/PageBox';
+import ZebraTable from '../components/zebraTable/ZebraTable';
 
 
 class Result extends React.Component {
@@ -40,6 +41,8 @@ class Result extends React.Component {
     setResToState(res) {
         this.setState({
             maxNo: res.maxNo,
+            lottery_prize:res.lottery_prize||[],
+            columns:res.columns,
             lotteryNo: res.lottery_no,
             lotteryTitle: res.lottery_name || '',
             ballResult: res.lotteryResArr || [],
@@ -48,12 +51,13 @@ class Result extends React.Component {
     }
 
     render() {
-        const { ballResult, wrapperWords, lotteryTitle, maxNo, lotteryNo } = this.state;
+        const { ballResult, wrapperWords, lotteryTitle, maxNo, lotteryNo,columns,lottery_prize } = this.state;
         return (
             <div className='ResultDiv'>
                 <h1 className='resultTitle'>{lotteryTitle}</h1>
                 <Nix ballResult={ballResult} />
                 <Headline staticWords='' options={{ hasClip: true }} wrapperWords={wrapperWords} />
+                <ZebraTable title='本期中奖情况' columns={columns} datas={lottery_prize} />
                 <PageBox {...this.props} sequence='reverseSequence' beforeLabel='第' afterLabel='期' maxPage={maxNo} currPage={lotteryNo} />
             </div>
         );
