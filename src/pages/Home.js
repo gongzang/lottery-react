@@ -1,5 +1,5 @@
 import React from 'react';
-import PageBox from '../components/pageBox/PageBox';
+import connectComponent from '../store/connectComponent';
 
 // 引入 ECharts 主模块
 var echarts = require('echarts/lib/echarts');
@@ -11,13 +11,18 @@ require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
 
 
-
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.data = tempData;
     }
-    componentDidMount() {
+    componentWillReceiveProps(nextProps){
+
+        console.log(nextProps);
+        const { homeData: { newestLotteryData } } = nextProps;
+        if(newestLotteryData && !newestLotteryData.name) {
+            return;
+        }
+
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
         // 绘制图表
@@ -30,7 +35,7 @@ class Home extends React.Component {
                 {
                     type: 'tree',
 
-                    data: [this.data],
+                    data: [newestLotteryData],
 
                     top: '18%',
                     bottom: '14%',
@@ -48,7 +53,6 @@ class Home extends React.Component {
                 }
             ]
         });
-        console.log(this.context);
     }
 
     render() {
@@ -445,4 +449,4 @@ const tempData = {
 }
 
 
-export default Home;
+export default connectComponent(Home);
