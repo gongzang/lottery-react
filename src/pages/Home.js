@@ -48,13 +48,14 @@ class Home extends React.Component {
                 }
             ]
         });
+        console.log(this.context);
     }
 
     render() {
         return (
-            <div>
+            <div className='ResultDiv'>
                 This new home!
-                <div id="main" style={{ width: '80rem', height: '60rem' }}></div>
+                <div id="main" style={{ width: '50rem', height: '50rem' }}></div>
             </div>
         );
     }
@@ -63,10 +64,10 @@ class Home extends React.Component {
 
 
 const tempData = {
-    "name": "flare",
+    "name": "彩票",
     "children": [
         {
-            "name": "analytics",
+            "name": "双色球",
             "children": [
                 {
                     "name": "cluster",

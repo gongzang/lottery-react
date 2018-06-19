@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import menu from './menu'
 
-const rootReducer = combineReducers({
+const Reducers = combineReducers({
     menu
 })
 
-export default rootReducer
+export default Reducers;
