@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 
 import BoxMenubar from './components/boxMenu/BoxMenubar';
+import Layout from './routes/index';
 
-import HomePage from './pages/Home';
-import ResultPage from './pages/Result';
 import './App.scss';
 import { get } from './utils/request';
 
@@ -39,10 +38,7 @@ class App extends Component {
     return (
       <Router>
         <div className="center App" style={divStyle}>
-          <Switch>
-            <Route path="/results/:lottery_id/:lottery_no" exact="false" component={ResultPage} />
-            <Route path="/" component={HomePage} />
-          </Switch>
+          <Layout/>
           <BoxMenubar menu={this.props.menu}>
           </BoxMenubar>
         </div>
